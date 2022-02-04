@@ -1,6 +1,6 @@
-from curses.ascii import isdigit
 import xmltodict
 import re
+import os
 from glob import glob
 
 from stm32data.util import *
@@ -15,6 +15,8 @@ def get(nvic_name, nvic_version, core):
 def parse():
     print("parsing interrupts")
     for f in glob('sources/cubedb/mcu/IP/NVIC*_Modes.xml'):
+        f = f.replace(os.path.sep, '/')
+
         if 'STM32MP1' in f:
             continue
         ff = removeprefix(f, 'sources/cubedb/mcu/IP/')

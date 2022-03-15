@@ -10,57 +10,57 @@ block/SDMMC:
       description: "The SDMMC_CLKCR register controls the SDMMC_CK output clock, the SDMMC_RX_CLK receive clock, and the bus width."
       byte_offset: 4
       fieldset: CLKCR
-    - name: ARGR
-      description: "The SDMMC_ARGR register contains a 32-bit command argument, which is sent to a card as part of a command message."
+    - name: ARG
+      description: "The SDMMC_ARG register contains a 32-bit command argument, which is sent to a card as part of a command message."
       byte_offset: 8
-      fieldset: ARGR
-    - name: CMDR
-      description: The SDMMC_CMDR register contains the command index and command type bits. The command index is sent to a card as part of a command message. The command type bits control the command path state machine (CPSM).
+      fieldset: ARG
+    - name: CMD
+      description: The SDMMC_CMD register contains the command index and command type bits. The command index is sent to a card as part of a command message. The command type bits control the command path state machine (CPSM).
       byte_offset: 12
-      fieldset: CMDR
-    - name: RESPCMDR
+      fieldset: CMD
+    - name: RESPCMD
       description: SDMMC command response register
       byte_offset: 16
       access: Read
-      fieldset: RESPCMDR
-    - name: RESPR
-      description: "The SDMMC_RESP1/2/3/4R registers contain the status of a card, which is part of the received response."
+      fieldset: RESPCMD
+    - name: RESP
+      description: "The SDMMC_RESP1/2/3/4 registers contain the status of a card, which is part of the received response."
       array:
         len: 4
         stride: 4
       byte_offset: 20
       access: Read
-      fieldset: RESP1R
+      fieldset: RESP1
     - name: DTIMER
       description: "The SDMMC_DTIMER register contains the data timeout period, in card bus clock periods. A counter loads the value from the SDMMC_DTIMER register, and starts decrementing when the data path state machine (DPSM) enters the Wait_R or Busy state. If the timer reaches 0 while the DPSM is in either of these states, the timeout status flag is set."
       byte_offset: 36
       fieldset: DTIMER
-    - name: DLENR
-      description: The SDMMC_DLENR register contains the number of data bytes to be transferred. The value is loaded into the data counter when data transfer starts.
+    - name: DLEN
+      description: The SDMMC_DLEN register contains the number of data bytes to be transferred. The value is loaded into the data counter when data transfer starts.
       byte_offset: 40
-      fieldset: DLENR
+      fieldset: DLEN
     - name: DCTRL
       description: The SDMMC_DCTRL register control the data path state machine (DPSM).
       byte_offset: 44
       fieldset: DCTRL
-    - name: DCNTR
-      description: "The SDMMC_DCNTR register loads the value from the data length register (see SDMMC_DLENR) when the DPSM moves from the Idle state to the Wait_R or Wait_S state. As data is transferred, the counter decrements the value until it reaches 0. The DPSM then moves to the Idle state and when there has been no error, the data status end flag (DATAEND) is set."
+    - name: DCOUNT
+      description: "The SDMMC_DCOUNT register loads the value from the data length register (see SDMMC_DLEN) when the DPSM moves from the Idle state to the Wait_R or Wait_S state. As data is transferred, the counter decrements the value until it reaches 0. The DPSM then moves to the Idle state and when there has been no error, the data status end flag (DATAEND) is set."
       byte_offset: 48
       access: Read
-      fieldset: DCNTR
-    - name: STAR
-      description: "The SDMMC_STAR register is a read-only register. It contains two types of flag:Static flags (bits [29,21,11:0]): these bits remain asserted until they are cleared by writing to the SDMMC interrupt Clear register (see SDMMC_ICR)Dynamic flags (bits [20:12]): these bits change state depending on the state of the underlying logic (for example, FIFO full and empty flags are asserted and de-asserted as data while written to the FIFO)"
+      fieldset: DCOUNT
+    - name: STA
+      description: "The SDMMC_STA register is a read-only register. It contains two types of flag:Static flags (bits [29,21,11:0]): these bits remain asserted until they are cleared by writing to the SDMMC interrupt Clear register (see SDMMC_ICR)Dynamic flags (bits [20:12]): these bits change state depending on the state of the underlying logic (for example, FIFO full and empty flags are asserted and de-asserted as data while written to the FIFO)"
       byte_offset: 52
       access: Read
-      fieldset: STAR
+      fieldset: STA
     - name: ICR
-      description: The SDMMC_ICR register is a write-only register. Writing a bit with 1 clears the corresponding bit in the SDMMC_STAR status register.
+      description: The SDMMC_ICR register is a write-only register. Writing a bit with 1 clears the corresponding bit in the SDMMC_STA status register.
       byte_offset: 56
       fieldset: ICR
-    - name: MASKR
+    - name: MASK
       description: The interrupt mask register determines which status flags generate an interrupt request by setting the corresponding bit to 1.
       byte_offset: 60
-      fieldset: MASKR
+      fieldset: MASK
     - name: ACKTIMER
       description: "The SDMMC_ACKTIMER register contains the acknowledgment timeout period, in SDMMC_CK bus clock periods. A counter loads the value from the SDMMC_ACKTIMER register, and starts decrementing when the data path state machine (DPSM) enters the Wait_Ack state. If the timer reaches 0 while the DPSM is in this states, the acknowledgment timeout status flag is set."
       byte_offset: 64
@@ -102,8 +102,8 @@ fieldset/ACKTIMER:
       description: Boot acknowledgment timeout period This bit can only be written by firmware when CPSM is disabled (CPSMEN = 0). Boot acknowledgment timeout period expressed in card bus clock periods.
       bit_offset: 0
       bit_size: 25
-fieldset/ARGR:
-  description: "The SDMMC_ARGR register contains a 32-bit command argument, which is sent to a card as part of a command message."
+fieldset/ARG:
+  description: "The SDMMC_ARG register contains a 32-bit command argument, which is sent to a card as part of a command message."
   fields:
     - name: CMDARG
       description: "Command argument. These bits can only be written by firmware when CPSM is disabled (CPSMEN = 0). Command argument sent to a card as part of a command message. If a command contains an argument, it must be loaded into this register before writing a command to the command register."
@@ -144,8 +144,8 @@ fieldset/CLKCR:
       description: Receive clock selection. These bits can only be written when the CPSM and DPSM are not active (CPSMACT = 0 and DPSMACT = 0)
       bit_offset: 20
       bit_size: 2
-fieldset/CMDR:
-  description: The SDMMC_CMDR register contains the command index and command type bits. The command index is sent to a card as part of a command message. The command type bits control the command path state machine (CPSM).
+fieldset/CMD:
+  description: The SDMMC_CMD register contains the command index and command type bits. The command index is sent to a card as part of a command message. The command type bits control the command path state machine (CPSM).
   fields:
     - name: CMDINDEX
       description: Command index. This bit can only be written by firmware when CPSM is disabled (CPSMEN = 0). The command index is sent to the card as part of a command message.
@@ -191,8 +191,8 @@ fieldset/CMDR:
       description: "The CPSM treats the command as a Suspend or Resume command and signals interrupt period start/end. This bit can only be written by firmware when CPSM is disabled (CPSMEN = 0). CMDSUSPEND = 1 and CMDTRANS = 0 Suspend command, start interrupt period when response bit BS=0. CMDSUSPEND = 1 and CMDTRANS = 1 Resume command with data, end interrupt period when response bit DF=1."
       bit_offset: 16
       bit_size: 1
-fieldset/DCNTR:
-  description: "The SDMMC_DCNTR register loads the value from the data length register (see SDMMC_DLENR) when the DPSM moves from the Idle state to the Wait_R or Wait_S state. As data is transferred, the counter decrements the value until it reaches 0. The DPSM then moves to the Idle state and when there has been no error, the data status end flag (DATAEND) is set."
+fieldset/DCOUNT:
+  description: "The SDMMC_DCOUNT register loads the value from the data length register (see SDMMC_DLENR) when the DPSM moves from the Idle state to the Wait_R or Wait_S state. As data is transferred, the counter decrements the value until it reaches 0. The DPSM then moves to the Idle state and when there has been no error, the data status end flag (DATAEND) is set."
   fields:
     - name: DATACOUNT
       description: "Data count value When read, the number of remaining data bytes to be transferred is returned. Write has no effect."
@@ -241,8 +241,8 @@ fieldset/DCTRL:
       description: "FIFO reset, will flush any remaining data. This bit can only be written by firmware when IDMAEN= 0 and DPSM is active (DPSMACT = 1). This bit will only take effect when a transfer error or transfer hold occurs."
       bit_offset: 13
       bit_size: 1
-fieldset/DLENR:
-  description: The SDMMC_DLENR register contains the number of data bytes to be transferred. The value is loaded into the data counter when data transfer starts.
+fieldset/DLEN:
+  description: The SDMMC_DLEN register contains the number of data bytes to be transferred. The value is loaded into the data counter when data transfer starts.
   fields:
     - name: DATALENGTH
       description: "Data length value This register can only be written by firmware when DPSM is inactive (DPSMACT = 0). Number of data bytes to be transferred. When DDR = 1 DATALENGTH is truncated to a multiple of 2. (The last odd byte is not transfered) When DATALENGTH = 0 no data will be transfered, when requested by a CPSMEN and CMDTRANS = 1 also no command will be transfered. DTEN and CPSMEN are cleared to 0."
@@ -255,7 +255,7 @@ fieldset/DTIMER:
       description: Data and R1b busy timeout period This bit can only be written when the CPSM and DPSM are not active (CPSMACT = 0 and DPSMACT = 0). Data and R1b busy timeout period expressed in card bus clock periods.
       bit_offset: 0
       bit_size: 32
-fieldset/FIFOR:
+fieldset/FIFO:
   description: The receive and transmit FIFOs can be only read or written as word (32-bit) wide registers. The FIFOs contain 16 entries on sequential addresses. This allows the CPU to use its load and store multiple operands to read from/write to the FIFO.When accessing SDMMC_FIFOR with half word or byte access an AHB bus fault is generated.
   fields:
     - name: FIFODATA
@@ -388,7 +388,7 @@ fieldset/IDMACTRLR:
       description: Double buffer mode active buffer indication This bit can only be written by firmware when DPSM is inactive (DPSMACT = 0). When IDMA is enabled this bit is toggled by hardware.
       bit_offset: 2
       bit_size: 1
-fieldset/MASKR:
+fieldset/MASK:
   description: The interrupt mask register determines which status flags generate an interrupt request by setting the corresponding bit to 1.
   fields:
     - name: CCRCFAILIE
@@ -502,43 +502,43 @@ fieldset/POWER:
       description: Data and command direction signals polarity selection. This bit can only be written when the SDMMC is in the power-off state (PWRCTRL = 00).
       bit_offset: 4
       bit_size: 1
-fieldset/RESP1R:
-  description: "The SDMMC_RESP1/2/3/4R registers contain the status of a card, which is part of the received response."
+fieldset/RESP1:
+  description: "The SDMMC_RESP1/2/3/4 registers contain the status of a card, which is part of the received response."
   fields:
     - name: CARDSTATUS1
       description: see Table 432
       bit_offset: 0
       bit_size: 32
-fieldset/RESP2R:
-  description: "The SDMMC_RESP1/2/3/4R registers contain the status of a card, which is part of the received response."
+fieldset/RESP2:
+  description: "The SDMMC_RESP1/2/3/4 registers contain the status of a card, which is part of the received response."
   fields:
     - name: CARDSTATUS2
       description: see Table404.
       bit_offset: 0
       bit_size: 32
-fieldset/RESP3R:
-  description: "The SDMMC_RESP1/2/3/4R registers contain the status of a card, which is part of the received response."
+fieldset/RESP3:
+  description: "The SDMMC_RESP1/2/3/4 registers contain the status of a card, which is part of the received response."
   fields:
     - name: CARDSTATUS3
       description: see Table404.
       bit_offset: 0
       bit_size: 32
-fieldset/RESP4R:
-  description: "The SDMMC_RESP1/2/3/4R registers contain the status of a card, which is part of the received response."
+fieldset/RESP4:
+  description: "The SDMMC_RESP1/2/3/4 registers contain the status of a card, which is part of the received response."
   fields:
     - name: CARDSTATUS4
       description: see Table404.
       bit_offset: 0
       bit_size: 32
-fieldset/RESPCMDR:
+fieldset/RESPCMD:
   description: SDMMC command response register
   fields:
     - name: RESPCMD
       description: Response command index
       bit_offset: 0
       bit_size: 6
-fieldset/STAR:
-  description: "The SDMMC_STAR register is a read-only register. It contains two types of flag:Static flags (bits [29,21,11:0]): these bits remain asserted until they are cleared by writing to the SDMMC interrupt Clear register (see SDMMC_ICR)Dynamic flags (bits [20:12]): these bits change state depending on the state of the underlying logic (for example, FIFO full and empty flags are asserted and de-asserted as data while written to the FIFO)"
+fieldset/STA:
+  description: "The SDMMC_STA register is a read-only register. It contains two types of flag:Static flags (bits [29,21,11:0]): these bits remain asserted until they are cleared by writing to the SDMMC interrupt Clear register (see SDMMC_ICR)Dynamic flags (bits [20:12]): these bits change state depending on the state of the underlying logic (for example, FIFO full and empty flags are asserted and de-asserted as data while written to the FIFO)"
   fields:
     - name: CCRCFAIL
       description: Command response received (CRC check failed). Interrupt flag is cleared by writing corresponding interrupt clear bit in SDMMC_ICR.

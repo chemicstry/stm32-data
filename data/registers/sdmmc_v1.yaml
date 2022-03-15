@@ -23,26 +23,14 @@ block/SDMMC:
       byte_offset: 16
       access: Read
       fieldset: RESPCMD
-    - name: RESP1
+    - name: RESP
       description: response 1..4 register
+      array:
+        len: 4
+        stride: 4
       byte_offset: 20
       access: Read
       fieldset: RESP1
-    - name: RESP2
-      description: response 1..4 register
-      byte_offset: 24
-      access: Read
-      fieldset: RESP2
-    - name: RESP3
-      description: response 1..4 register
-      byte_offset: 28
-      access: Read
-      fieldset: RESP3
-    - name: RESP4
-      description: response 1..4 register
-      byte_offset: 32
-      access: Read
-      fieldset: RESP4
     - name: DTIMER
       description: data timer register
       byte_offset: 36
@@ -367,36 +355,6 @@ fieldset/POWER:
       bit_offset: 0
       bit_size: 2
 fieldset/RESP1:
-  description: response 1..4 register
-  fields:
-    - name: CARDSTATUS
-      description: see Table 132
-      bit_offset: 0
-      bit_size: 32
-      array:
-        len: 1
-        stride: 0
-fieldset/RESP2:
-  description: response 1..4 register
-  fields:
-    - name: CARDSTATUS
-      description: see Table 132
-      bit_offset: 0
-      bit_size: 32
-      array:
-        len: 1
-        stride: 0
-fieldset/RESP3:
-  description: response 1..4 register
-  fields:
-    - name: CARDSTATUS
-      description: see Table 132
-      bit_offset: 0
-      bit_size: 32
-      array:
-        len: 1
-        stride: 0
-fieldset/RESP4:
   description: response 1..4 register
   fields:
     - name: CARDSTATUS

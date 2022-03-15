@@ -361,9 +361,6 @@ fieldset/RESP1:
       description: see Table 132
       bit_offset: 0
       bit_size: 32
-      array:
-        len: 1
-        stride: 0
 fieldset/RESPCMD:
   description: command response register
   fields:

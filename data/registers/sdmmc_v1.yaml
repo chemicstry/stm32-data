@@ -248,6 +248,10 @@ fieldset/ICR:
       description: DATAEND flag clear bit
       bit_offset: 8
       bit_size: 1
+    - name: STBITERRC
+      description: STBITERR flag clear bit
+      bit_offset: 9
+      bit_size: 1
     - name: DBCKENDC
       description: DBCKEND flag clear bit
       bit_offset: 10
@@ -255,6 +259,10 @@ fieldset/ICR:
     - name: SDIOITC
       description: SDIOIT flag clear bit
       bit_offset: 22
+      bit_size: 1
+    - name: CEATAENDC
+      description: CEATAEND flag clear bit
+      bit_offset: 23
       bit_size: 1
 fieldset/MASK:
   description: mask register
@@ -407,6 +415,10 @@ fieldset/STA:
       description: "Data end (data counter, SDIDCOUNT, is zero)"
       bit_offset: 8
       bit_size: 1
+    - name: STBITERR
+      description: Start bit not detected on all data signals in wide bus mode
+      bit_offset: 9
+      bit_size: 1
     - name: DBCKEND
       description: Data block sent/received (CRC check passed)
       bit_offset: 10
@@ -458,4 +470,8 @@ fieldset/STA:
     - name: SDIOIT
       description: SDIO interrupt received
       bit_offset: 22
+      bit_size: 1
+    - name: CEATAEND
+      description: CE-ATA command completion signal received for CMD61
+      bit_offset: 23
       bit_size: 1

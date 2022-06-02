@@ -3878,7 +3878,7 @@
                     "address": 1476411392,
                     "registers": {
                         "kind": "rtc",
-                        "version": "v2-h7",
+                        "version": "v2h7",
                         "block": "RTC"
                     },
                     "pins": [
@@ -11941,7 +11941,7 @@
                     "address": 1476411392,
                     "registers": {
                         "kind": "rtc",
-                        "version": "v2-h7",
+                        "version": "v2h7",
                         "block": "RTC"
                     },
                     "pins": [

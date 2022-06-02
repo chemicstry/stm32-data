@@ -1677,7 +1677,7 @@
                     "address": 1073752064,
                     "registers": {
                         "kind": "rtc",
-                        "version": "v2-l4",
+                        "version": "v2l4",
                         "block": "RTC"
                     },
                     "pins": [

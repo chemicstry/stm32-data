@@ -3366,7 +3366,7 @@
                     "address": 1174435840,
                     "registers": {
                         "kind": "rtc",
-                        "version": "v3-u5",
+                        "version": "v3u5",
                         "block": "RTC"
                     },
                     "pins": [

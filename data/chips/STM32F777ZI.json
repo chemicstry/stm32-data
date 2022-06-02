@@ -3596,7 +3596,7 @@
                     "address": 1073752064,
                     "registers": {
                         "kind": "rtc",
-                        "version": "v2-f7",
+                        "version": "v2f7",
                         "block": "RTC"
                     },
                     "rcc": {

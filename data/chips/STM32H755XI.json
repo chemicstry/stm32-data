@@ -4549,6 +4549,11 @@
                 {
                     "name": "RTC",
                     "address": 1476411392,
+                    "registers": {
+                        "kind": "rtc",
+                        "version": "v2-h7",
+                        "block": "RTC"
+                    },
                     "pins": [
                         {
                             "pin": "PB2",
@@ -13609,6 +13614,11 @@
                 {
                     "name": "RTC",
                     "address": 1476411392,
+                    "registers": {
+                        "kind": "rtc",
+                        "version": "v2-h7",
+                        "block": "RTC"
+                    },
                     "pins": [
                         {
                             "pin": "PB2",

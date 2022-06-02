@@ -1439,6 +1439,11 @@
                 {
                     "name": "RTC",
                     "address": 1073752064,
+                    "registers": {
+                        "kind": "rtc",
+                        "version": "v2-f2",
+                        "block": "RTC"
+                    },
                     "pins": [
                         {
                             "pin": "PB15",

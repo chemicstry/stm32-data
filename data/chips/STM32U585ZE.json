@@ -3431,6 +3431,11 @@
                 {
                     "name": "RTC",
                     "address": 1174435840,
+                    "registers": {
+                        "kind": "rtc",
+                        "version": "v3-u5",
+                        "block": "RTC"
+                    },
                     "pins": [
                         {
                             "pin": "PB2",
